@@ -89,7 +89,7 @@
             }
         }, 1000);
 
-        function submitQuiz() {
+      function submitQuiz() {
             if (localStorage.getItem("quizSubmitted") === "true") return;
 
             let score = 0;
@@ -104,15 +104,21 @@
                     }
                 }
             }
-            document.getElementById("result").innerHTML = `<h2>Votre score : ${score}/10</h2>`;
-            localStorage.setItem("quizSubmitted", "true");
-            document.getElementById("quizForm").innerHTML = "<p>Merci pour votre participation. Vous avez déjà soumis ce quiz.</p>";
 
+            let resultHTML = `<h2>Votre score : ${score}/10</h2>`;
             if (score > 8) {
-                document.getElementById("congrats").innerHTML = `
-                    <h3>🎉 Félicitations ! Vous venez de gagner un wave !</h3>
-                    <img src="https://cdn.pixabay.com/photo/2020/04/28/09/36/cyber-security-5101983_1280.jpg" alt="Félicitations Cybersécurité">
-                    <img src="Cybermois.png" alt="Cybermois" />
+                resultHTML += `
+                    <div style="text-align:center; margin-top:20px;">
+                        <h2>Félicitations ! Vous venez de gagner un wave 🎉</h2>
+                        <img src="Cybermois.png" alt="Cybermois" style="max-width:300px; margin-top:10px;">
+                    </div>
+                `;
+            } else {
+                resultHTML += `
+                    <div style="text-align:center; margin-top:20px;">
+                        <h2>Désolé, vous n'avez pas eu de wave. À l'année prochaine !</h2>
+                        <img src="Cybermois.png" alt="Cybermois" style="max-width:300px; margin-top:10px;">
+                    </div>
                 `;
             }
         }
