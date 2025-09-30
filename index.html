@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Cybersécurité – CyberMois 2025</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question h3 {
+            margin-bottom: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        #timer {
+            font-size: 18px;
+            color: red;
+            margin-bottom: 20px;
+        }
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #121212;
+                color: #ffffff;
+            }
+            button {
+                background-color: #333;
+                color: #fff;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Quiz Cybersécurité – CyberMois 2025</h1>
+    <div id="timer">Temps restant : 3:00</div>
+    <form id="quizForm">
+        <!-- Questions -->
+        <div class="question">
+            <h3>1. Quel est le mot de passe le plus sécurisé parmi les suivants ?</h3>
+            <label><input type="radio" name="q1" value="0"> 123456</label><br>
+            <label><input type="radio" name="q1" value="0"> azerty</label><br>
+            <label><input type="radio" name="q1" value="1"> P@ssw0rd!2025</label><br>
+            <label><input type="radio" name="q1" value="0"> monmotdepasse</label>
+        </div>
+        <div class="question">
+            <h3>2. Que signifie le “https” dans une adresse web ?</h3>
+            <label><input type="radio" name="q2" value="0"> HyperText Protocol Standard</label><br>
+            <label><input type="radio" name="q2" value="1"> Site sécurisé avec certificat SSL</label><br>
+            <label><input type="radio" name="q2" value="0"> Site hébergé en France</label><br>
+            <label><input type="radio" name="q2" value="0"> Aucune de ces réponses</label>
+        </div>
+        <div class="question">
+            <h3>3. Quelle est la meilleure pratique pour gérer ses mots de passe ?</h3>
+            <label><input type="radio" name="q3" value="0"> Utiliser le même mot de passe partout</label><br>
+            <label><input type="radio" name="q3" value="0"> Les noter sur un post-it</label><br>
+            <label><input type="radio" name="q3" value="1"> Utiliser un gestionnaire de mots de passe</label><br>
+            <label><input type="radio" name="q3" value="0"> Les mémoriser tous</label>
+        </div>
+        <div class="question">
+            <h3>4. Que faire si vous recevez un e-mail suspect avec une pièce jointe ?</h3>
+            <label><input type="radio" name="q4" value="0"> L’ouvrir pour vérifier</label><br>
+            <label><input type="radio" name="q4" value="0"> Le transférer à un collègue</label><br>
+            <label><input type="radio" name="q4" value="1"> Le supprimer sans l’ouvrir</label><br>
+            <label><input type="radio" name="q4" value="0"> Répondre pour demander plus d’infos</label>
+        </div>
+        <div class="question">
+            <h3>5. Qu’est-ce qu’un phishing ?</h3>
+            <label><input type="radio" name="q5" value="0"> Une attaque par virus</label><br>
+            <label><input type="radio" name="q5" value="1"> Une tentative de vol d’informations via un faux message</label><br>
+            <label><input type="radio" name="q5" value="0"> Un logiciel de sécurité</label><br>
+            <label><input type="radio" name="q5" value="0"> Une sauvegarde automatique</label>
+        </div>
+        <div class="question">
+            <h3>6. Quelle est la fréquence recommandée pour mettre à jour vos logiciels ?</h3>
+            <label><input type="radio" name="q6" value="0"> Une fois par an</label><br>
+            <label><input type="radio" name="q6" value="0"> Quand vous avez le temps</label><br>
+            <label><input type="radio" name="q6" value="1"> Dès qu’une mise à jour est disponible</label><br>
+            <label><input type="radio" name="q6" value="0"> Jamais, si tout fonctionne</label>
+        </div>
+        <div class="question">
+            <h3>7. Quel comportement est risqué sur un réseau Wi-Fi public ?</h3>
+            <label><input type="radio" name="q7" value="0"> Lire les actualités</label><br>
+            <label><input type="radio" name="q7" value="1"> Se connecter à son compte bancaire</label><br>
+            <label><input type="radio" name="q7" value="0"> Regarder une vidéo</label><br>
+            <label><input type="radio" name="q7" value="0"> Utiliser un VPN</label>
+        </div>
+        <div class="question">
+            <h3>8. Que signifie l’authentification à deux facteurs (2FA) ?</h3>
+            <label><input type="radio" name="q8" value="0"> Se connecter deux fois</label><br>
+            <label><input type="radio" name="q8" value="0"> Utiliser deux appareils</label><br>
+            <label><input type="radio" name="q8" value="1"> Ajouter une vérification supplémentaire (code, appli, etc.)</label><br>
+            <label><input type="radio" name="q8" value="0"> Avoir deux mots de passe</label>
+        </div>
+        <div class="question">
+            <h3>9. Quel est le rôle d’un antivirus ?</h3>
+            <label><input type="radio" name="q9" value="0"> Accélérer l’ordinateur</label><br>
+            <label><input type="radio" name="q9" value="0"> Bloquer les publicités</label><br>
+            <label><input type="radio" name="q9" value="1"> Détecter et neutraliser les logiciels malveillants</label><br>
+            <label><input type="radio" name="q9" value="0"> Sauvegarder les fichiers</label>
+        </div>
+        <div class="question">
+            <h3>10. Que faire si vous pensez que votre compte a été piraté ?</h3>
+            <label><input type="radio" name="q10" value="0"> Ignorer</label><br>
+            <label><input type="radio" name="q10" value="1"> Changer immédiatement le mot de passe</label><br>
+            <label><input type="radio" name="q10" value="0"> Supprimer le compte</label><br>
+            <label><input type="radio" name="q10" value="0"> Attendre un message de l’attaquant</label>
+        </div>
+        <button type="button" onclick="submitQuiz()">Soumettre</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+        if (localStorage.getItem("quizSubmitted") === "true") {
+            document.getElementById("quizForm").innerHTML = "<p>Vous avez déjà soumis ce quiz. Une seule tentative est autorisée.</p>";
+        }
+
+        let timeLeft = 300;
+        const timerElement = document.getElementById("timer");
+        const timer = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                submitQuiz();
+            } else {
+                let minutes = Math.floor(timeLeft / 60);
+                let seconds = timeLeft % 60;
+                timerElement.textContent = `Temps restant : ${minutes}:${seconds.toString().padStart(2, '0')}`;
+                timeLeft--;
+            }
+        }, 1000);
+
+        function submitQuiz() {
+            if (localStorage.getItem("quizSubmitted") === "true") return;
+
+            let score = 0;
+            const form = document.forms["quizForm"];
+            for (let i = 1; i <= 10; i++) {
+                const q = form["q" + i];
+                if (q) {
+                    for (let j = 0; j < q.length; j++) {
+                        if (q[j].checked && q[j].value === "1") {
+                            score++;
+                        }
+                    }
+                }
+            }
+
+            let resultHTML = `<h2>Votre score : ${score}/10</h2>`;
+            if (score > 8) {
+                resultHTML += `
+                <div id="congrats" style="margin-top: 20px; text-align: center;">
+                    <h2 style="color: green;">🎉 Félicitations ! Vous venez de gagner un wave !</h2>
+                    <p>Votre score est excellent. Continuez à adopter les bonnes pratiques en cybersécurité !</p>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Cybersecurity_Icon.png/240px-Cybersecurity_Icon.png" alt="Félicitations Cybersécurité" style="max-width: 200px; margin-top: 10px;">
+                </div>`;
+            }
+
+            document.getElementById("result").innerHTML = resultHTML;
+            localStorage.setItem("quizSubmitted", "true");
+            document.getElementById("quizForm").innerHTML = "<p>Merci pour votre participation. Vous avez déjà soumis ce quiz.</p>";
+        }
+    </script>
+</body>
+</html>
