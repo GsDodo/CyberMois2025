@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Cybersécurité – CyberMois 2025</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .question {
+            margin-bottom: 20px;
+            max-width: 600px;
+            text-align: left;
+        }
+        .question h3 {
+            margin-bottom: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        #timer {
+            font-size: 18px;
+            color: red;
+            margin-bottom: 20px;
+        }
+        #result {
+            text-align: center;
+            margin-top: 20px;
+        }
+        #result img {
+            max-width: 300px;
+            display: block;
+            margin: 10px auto;
+        }
+        .success {
+            color: green;
+        }
+        .failure {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quiz Cybersécurité – CyberMois 2025</h1>
+    <div id="timer">Temps restant : 3:00</div>
+    <form id="quizForm">
+        <!-- Questions will be inserted here -->
+    </form>
+    <div id="result"></div>
+
+    <script>
+        if (localStorage.getItem("quizSubmitted") === "true") {
+            document.getElementById("quizForm").innerHTML = "<p style='text-align:center;'>Vous avez déjà soumis ce quiz. Une seule tentative est autorisée.</p>";
+        }
+
+        let timeLeft = 180;
+        const timerElement = document.getElementById("timer");
+        const timer = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                submitQuiz(true);
+            } else {
+                let minutes = Math.floor(timeLeft / 60);
+                let seconds = timeLeft % 60;
+                timerElement.textContent = `Temps restant : ${minutes}:${seconds.toString().padStart(2, '0')}`;
+                timeLeft--;
+            }
+        }, 1000);
+
+        function submitQuiz(timeout = false) {
+            if (localStorage.getItem("quizSubmitted") === "true") return;
+
+            let score = 0;
+            const form = document.forms["quizForm"];
+            for (let i = 1; i <= 10; i++) {
+                const q = form["q" + i];
+                if (q) {
+                    for (let j = 0; j < q.length; j++) {
+                        if (q[j].checked && q[j].value === "1") {
+                            score++;
+                        }
+                    }
+                }
+            }
+
+            let resultDiv = document.getElementById("result");
+            if (timeout) {
+                resultDiv.innerHTML = "<h2 class='failure'>⏳ Temps écoulé !</h2><p class='failure'>Vous n'avez pas terminé à temps.</p><img src='Cybermois.png' alt='Cybermois'>";
+            } else if (score > 8) {
+                resultDiv.innerHTML = `<h2 class='success'>Félicitations ! Vous venez de gagner un wave 🎉</h2><p class='success'>Votre score : ${score}/10</p><img src='Cybermois.png' alt='Cybermois'>`;
+            } else {
+                resultDiv.innerHTML = `<h2 class='failure'>Désolé, vous n'avez pas eu de wave 😔</h2><p class='failure'>À l'année prochaine !<br>Votre score : ${score}/10</p><img src='Cybermois.png' alt='Cybermois'>`;
+            }
+
+            localStorage.setItem("quizSubmitted", "true");
+            document.getElementById("quizForm").innerHTML = "<p style='text-align:center;'>Merci pour votre participation. Vous avez déjà soumis ce quiz.</p>";
+        }
+
+        // Insert questions dynamically
+        const questions = [
+            ["Quel est le mot de passe le plus sécurisé parmi les suivants ?", ["123456", "azerty", "P@ssw0rd!2025", "monmotdepasse"], 2],
+            ["Que signifie le “https” dans une adresse web ?", ["HyperText Protocol Standard", "Site sécurisé avec certificat SSL", "Site hébergé en France", "Aucune de ces réponses"], 1],
+            ["Quelle est la meilleure pratique pour gérer ses mots de passe ?", ["Utiliser le même mot de passe partout", "Les noter sur un post-it", "Utiliser un gestionnaire de mots de passe", "Les mémoriser tous"], 2],
+            ["Que faire si vous recevez un e-mail suspect avec une pièce jointe ?", ["L’ouvrir pour vérifier", "Le transférer à un collègue", "Le supprimer sans l’ouvrir", "Répondre pour demander plus d’infos"], 2],
+            ["Qu’est-ce qu’un phishing ?", ["Une attaque par virus", "Une tentative de vol d’informations via un faux message", "Un logiciel de sécurité", "Une sauvegarde automatique"], 1],
+            ["Quelle est la fréquence recommandée pour mettre à jour vos logiciels ?", ["Une fois par an", "Quand vous avez le temps", "Dès qu’une mise à jour est disponible", "Jamais, si tout fonctionne"], 2],
+            ["Quel comportement est risqué sur un réseau Wi-Fi public ?", ["Lire les actualités", "Se connecter à son compte bancaire", "Regarder une vidéo", "Utiliser un VPN"], 1],
+            ["Que signifie l’authentification à deux facteurs (2FA) ?", ["Se connecter deux fois", "Utiliser deux appareils", "Ajouter une vérification supplémentaire (code, appli, etc.)", "Avoir deux mots de passe"], 2],
+            ["Quel est le rôle d’un antivirus ?", ["Accélérer l’ordinateur", "Bloquer les publicités", "Détecter et neutraliser les logiciels malveillants", "Sauvegarder les fichiers"], 2],
+            ["Que faire si vous pensez que votre compte a été piraté ?", ["Ignorer", "Changer immédiatement le mot de passe", "Supprimer le compte", "Attendre un message de l’attaquant"], 1]
+        ];
+
+        const form = document.getElementById("quizForm");
+        questions.forEach((q, index) => {
+            const div = document.createElement("div");
+            div.className = "question";
+            const h3 = document.createElement("h3");
+            h3.textContent = `${index + 1}. ${q[0]}`;
+            div.appendChild(h3);
+            q[1].forEach((option, i) => {
+                const label = document.createElement("label");
+                const input = document.createElement("input");
+                input.type = "radio";
+                input.name = "q" + (index + 1);
+                input.value = (i === q[2]) ? "1" : "0";
+                label.appendChild(input);
+                label.appendChild(document.createTextNode(" " + option));
+                div.appendChild(label);
+                div.appendChild(document.createElement("br"));
+            });
+            form.appendChild(div);
+        });
+
+        const submitButton = document.createElement("button");
+        submitButton.type = "button";
+        submitButton.textContent = "Soumettre";
+        submitButton.onclick = () => submitQuiz();
+        form.appendChild(submitButton);
+    </script>
+</body>
+</html>
